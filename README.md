@@ -11,7 +11,7 @@
 * upload js, css, image, etc...
    * you can upload file in the /public
  
-* Install (Ubuntu)
+* Initial setting (Ubuntu)
 ~~~
 $ sudo apt-get update
 $ sudo apt-get upgrade
