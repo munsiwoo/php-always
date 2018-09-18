@@ -1,4 +1,4 @@
-# simple mvc project in php
+# simple mvc project in pure php
 
 * summary
   * It helps you make php website fast.
