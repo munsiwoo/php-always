@@ -5,7 +5,7 @@ made by `munsiwoo`
 
 Project name : `simple mvc project in pure php`  
 Development language : `php`  
-Available Versions (php) : `5.6`,` 7.0`, `7.2`  
+Available Versions (php) : `5.6`, ` 7.0`, `7.2`  
   
 * Summary
 	*  It helps you make php website `fast`.
@@ -28,3 +28,4 @@ $ sudo apt-get install php
 $ sudo apt-get install php-sqlite3
 $ sudo apt-get install libapache2-mod-php
 ```
+  
