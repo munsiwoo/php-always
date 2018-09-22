@@ -17,15 +17,14 @@ Available Versions (php) : `5.6`, ` 7.0`, `7.2`
 	* Static, public file upload to the `/public` directory.
 * Initial setting (ubuntu)
 ```
-$ sudo apt-get update
-$ sudo apt-get upgrade
+$ sudo apt update
 
-$ sudo apt-get install sqlite3
-$ sudo apt-get install apache2
+$ sudo apt install sqlite3
+$ sudo apt install apache2
 $ sudo cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 
-$ sudo apt-get install php
-$ sudo apt-get install php-sqlite3
-$ sudo apt-get install libapache2-mod-php
+$ sudo apt install php
+$ sudo apt install php-sqlite3
+$ sudo apt install libapache2-mod-php
 ```
   
