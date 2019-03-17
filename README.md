@@ -3,9 +3,9 @@
 
 made by `munsiwoo`  
 
-Project name : `simple mvc project in pure php`  
-Development language : `php`  
-Available Versions (php) : `5.6`, ` 7.0`, `7.2`  
+Project Name : `simple mvc project in pure php`  
+Development Language : `php`  
+Available Versions : `PHP 5.5+`, `PHP 7.0+`  
   
 * Summary
 	*  It helps you make php website `fast`.
