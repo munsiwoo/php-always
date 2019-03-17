@@ -1,5 +1,5 @@
 
-# simple mvc in pure php
+# Simple MVC Framework (PHP and Apache)
 
 made by `munsiwoo`  
 
