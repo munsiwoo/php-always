@@ -3,7 +3,7 @@
 
 made by `munsiwoo`  
 
-Project Name : `simple mvc project in pure php`  
+Project Name : `Simple MVC in PHP`  
 Development Language : `php`  
 Available Versions : `PHP 5.5+`, `PHP 7.0+`  
   
