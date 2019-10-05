@@ -12,6 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/config/function.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/classes/Controller.class.php';
 
+
 if($page = secure_page($_GET['p'])) {
 	$method = $_SERVER['REQUEST_METHOD'];
 	$is_login = isset($_SESSION['username']);
