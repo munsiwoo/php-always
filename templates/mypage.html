@@ -1,11 +1,8 @@
-<p style="font-size:35px;">mypage</p>
-<table style="font-size:25px;">
-	<tr>
-		<td>Username : </td>
-		<td>&nbsp;{USERNAME}</td>
-	</tr>
-	<tr>
-		<td>Password : </td>
-		<td>&nbsp;{PASSWORD}</td>
-	</tr>
-</table>
+<h1>Mypage</h1>
+<p>
+    <b>Username</b> : @var($username)<br>
+    <b>My posts</b><br>
+    @mun foreach($posts as $i=>$post)
+        @var($i). <a href="/read?no=@var($post['no'])">@var($post['title'])</a><br>
+    @endforeach
+</p>

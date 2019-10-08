@@ -1,0 +1,33 @@
+<script>
+    function post_update() {
+        let data = {
+            'title':$('[name="title"]').val(),
+            'contents':$('[name="contents"]').val(),
+            'no':@var($post['no']),
+        };
+
+        $.post("/update", data, function(response) {
+            let result = JSON.parse(response);
+            $(".update-result").fadeIn(1000);
+            $(".update-result").text(result['msg']);
+
+            if(result['status']) {
+                setTimeout(function() {
+                    location.href = result['rurl'];
+                }, 1000);
+            }
+
+            $(".update-result").fadeOut(2000);
+        });
+    }
+</script>
+
+<h1>Update</h1>
+
+<form method="POST" class="update-form" onsubmit="post_update();return false;">
+    <input type="text" name="title" placeholder="Title" value="@var($post['title'])" maxlength="35" required="" autofocus=""><br>
+    <textarea name="contents" placeholder="Contents">@var($post['contents'])</textarea><br>
+    <input type="submit" value="Update">
+</form>
+
+<div class="update-result"></div>

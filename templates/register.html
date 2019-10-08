@@ -1,20 +1,29 @@
 <script>
-	function register() {
+	function user_register() {
 		let data = {
-			'username':$("#username").val(),
-			'password':$("#password").val()
-		};
+            'username':$('[name="username"]').val(),
+            'password':$('[name="password"]').val(),
+        };
 		
-		$.post("/register", data, function(res) {
-			$("#result").html(res);
-		});
+		$.post("/register", data, function(response) {
+            let result = JSON.parse(response);
+            $(".register-result").text(result['msg']);
+            $(".register-result").fadeIn(1000);
+
+            if(result['status']) {
+                setTimeout(function() {
+                    location.href = "/login";
+                }, 1000);
+            }
+            $(".register-result").fadeOut(2000);
+        });
 	}
 </script>
 
-<p style="font-size:35px;">register</p>
-<form>
-	<input type="text" id="username" name="username" placeholder="username" style="width: 244px; height: 40px; font-size: 19px; padding: 5px; margin-bottom: 2px;" autofocus><br>
-	<input type="password" id="password" name="password" placeholder="password" style="width: 244px; height: 40px; font-size: 19px; padding: 5px; margin-bottom: 2px;"><br>
-	<input type="submit" value="register" style="width: 244px; height: 35px; font-size: 19px;" onclick="register(); return false;">
+<h1>Register</h1>
+<form method="POST" class="register-form" onsubmit="user_register(); return false;">
+    <input type="text" name="username" placeholder="Username" required="" autofocus=""><br>
+    <input type="password" name="password" placeholder="Password" required="">
+    <input type="submit" value="Register">
 </form>
-<div id="result" style="margin-top:10px;"></div>
+<div class="register-result"></div>

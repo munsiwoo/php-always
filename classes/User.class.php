@@ -5,51 +5,61 @@ class User extends SQLite3 {
 		parent::__construct(__DB__);
 	}
 
-	public function login($data) {
-		$data = array_map('anti_sqli', $data);
-		
-		$username = $data['username'];
-		$password = password($data['password']);
+    public function user_login($data) {
+        $username = anti_sqlite_inject($data['username']);
+        $password = process_password($data['password']);
+        $retval = ['status' => false];
+        
+        $query = "SELECT * FROM mun_users WHERE username='{$username}' AND password='{$password}';";
+        $result = $this->query($query);
+        $fetch = $result->fetchArray(SQLITE3_ASSOC);
 
-		$query = "SELECT * FROM `users` WHERE `username`='{$username}' AND `password`='{$password}';";
-		$query = $this->query($query);
+        if($fetch['username']) {
+            if($fetch['username'] === __ADMIN__) {
+                $_SESSION['admin'] = true; // $is_admin
+            }
+            $_SESSION['username'] = $fetch['username']; // $is_login
+            $_SESSION['userip'] = $_SERVER['REMOTE_ADDR'];
 
-		if($fetch = $query->fetchArray()) {
-			$_SESSION['username'] = $fetch['username'];
+            $retval['msg'] = "Hello, {$fetch['username']}";
+            $retval['status'] = true;
+        }
+        else {
+            $retval['msg'] = "Login failed.";
+        }
 
-			if($_SESSION['username'] === __ADMIN__) {
-				$_SESSION['admin'] = true;
-				go('/home', 'hello, '.htmlspecialchars(__ADMIN__));
-			}
+        return json_encode($retval);
+    }
 
-			go('/home', 'login success');
-		}
+    public function user_register($data) {
 
-		die('<h2>login failed.</h2>'); // login fail
-	}
+        $username = anti_sqlite_inject(mb_substr($data['username'], 0, 30));
+        $password = process_password($data['password']);
+        $retval = ['status' => false];
 
-	public function register($data) {
-		$data = array_map('anti_sqli', $data);
+        if(preg_match('/[^\w\sㄱ-힣_\-+]+/mis', $username)) { // check username
+            $retval['msg']  = 'Allowed range :'.PHP_EOL; 
+            $retval['msg'] .= 'alphabet, number, hangul, whitespace, _, -, +';
+            return json_encode($retval);
+        }
 
-		$username = $data['username'];
-		$password = password($data['password']);
+        if(mb_strlen($data['password']) < 5) {
+            $retval['msg'] = 'Your password is too short. (more than 5digits)';
+            return json_encode($retval);
+        }
 
-		if(preg_match("/(\s|admin|_)/i", $username, $matche)) {
-			die('keyword "'.$matche[0].'" is not allowed');
-		}
+        $result = $this->query("SELECT * FROM mun_users WHERE username='{$username}';");
+        if($result->fetchArray(SQLITE3_ASSOC)) {
+            $retval['msg'] = 'Already exists username!';
+            return json_encode($retval);
+        }
 
-		if(strlen($password) < 5) {
-			die('password is too short');
-		}
+        $this->query("INSERT INTO mun_users VALUES ('{$username}', '{$password}', datetime());");
+        $retval['msg'] = 'Registration completed.';
+        $retval['status'] = true;
+        
+        return json_encode($retval);
+    }
 
-		$query = "SELECT * FROM `users` WHERE `username`='{$username}';";
-		$query = $this->query($query);
-		if($query->fetchArray()) die('already exists');
-
-		$query = "INSERT INTO `users` VALUES ('{$username}', '{$password}');";
-		$query = $this->query($query);
-
-		go('/login', 'register success');
-	}
 
 }

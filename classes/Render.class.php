@@ -5,49 +5,54 @@ class Render extends SQLite3 {
 		parent::__construct(__DB__);
 	}
 
-	public function render_template($page) {
-		$file = $_SERVER['DOCUMENT_ROOT'].'/templates/'.$page.'.html';
-		$html = file_get_contents($file);
+	public function get_top_menu($is_login, $is_admin) { // Render header.html
+        $retval = $is_login ? __USER_MENU__ : __GUEST_MENU__;
+        if($is_admin)
+            $retval['Admin'] = __ADMIN_PAGE__;
 
-		switch($page) {
-			case 'header' :
-				$html = str_replace('{MENU}', $this->menu_loader(), $html);
-				break;
-			case 'mypage' :
-				$fetch = array_map('htmlspecialchars', $this->mypage_loader($_SESSION['username'])); 
-				$html = str_replace('{USERNAME}', $fetch['username'], $html);
-				$html = str_replace('{PASSWORD}', $fetch['password'], $html);
-				break;
-			default :
-				break;
-		}
+        return $retval;
+    }
 
-		echo preg_replace('/\n+|\t+|\s{2}/', '', $html); // render
-	}
+    public function get_board_posts() { // Render board.html
+        $query = "SELECT * FROM mun_board ORDER BY no DESC;";
+        $result = $this->query($query);
+        $retval = [];
 
-	private function menu_loader() {
-		$menu_list = isset($_SESSION['username']) ? 
-		['home'=>'/home', 'mypage'=>'/mypage', 'logout'=>'/logout'] :
-		['home'=>'/home', 'login'=>'/login', 'register'=>'/register'];
+        while($fetch = $result->fetchArray(SQLITE3_ASSOC)) {
+            $fetch = array_map('htmlspecialchars', $fetch);
+            array_push($retval, $fetch);
+        }
 
-		if(isset($_SESSION['admin'])) {
-			$menu_list = ['home'=>'/home', 'admin'=>'/admin', 'mypage'=>'/mypage', 'logout'=>'/logout'];
-		}
+        return $retval;
+    }
 
-		$result  = '<table><tr>';
-		foreach($menu_list as $menu=>$url) {
-			$result .= '<td style="padding-right: 15px;">'.
-			"<a href=\"{$url}\" style=\"font-size:30px;\">{$menu}</a></td>";
-		}
-		$result .= '</tr></table>';
+    public function get_user_posts($username) { // Render mypage.html
+        $username = anti_sqlite_inject($username);
+        $result = $this->query("SELECT * FROM mun_board WHERE username='{$username}';");
+        $retval = [];
 
-		return $result;
-	}
+        while($fetch = $result->fetchArray(SQLITE3_ASSOC)) {
+            $fetch = array_map('htmlspecialchars', $fetch);
+            array_push($retval, $fetch);
+        }
 
-	private function mypage_loader($username) {
-		$username = anti_sqli($username);
-		$query = $this->query("SELECT * FROM `users` WHERE `username`='{$username}';");
-		return $query->fetchArray();
-	}
+        return $retval;
+    }
+
+    public function get_post($no, $username) { // Render update.html
+        $no = (int)$no;
+        $retval = ['status'=>false];
+
+        $result = $this->query("SELECT * FROM mun_board WHERE no='{$no}';");
+        $fetch = $result->fetchArray(SQLITE3_ASSOC);
+
+        if($fetch['username'] === $username) {
+            $retval['status'] = true;
+            $retval['result'] = array_map('htmlspecialchars', $fetch);
+            return $retval;
+        }
+
+        return $retval;
+    }
 
 }
