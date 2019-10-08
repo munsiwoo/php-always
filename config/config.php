@@ -25,3 +25,5 @@ define('__GUEST_MENU__', [
     'Login' => '/login',
     'Register' => '/register',
 ]);
+
+define('__ADMIN_PAGE__', '/admin');
