@@ -127,6 +127,17 @@ class Controller {
                     break;
                 }
                 break;
+
+
+            /* admin pages */
+
+            case '/admin' :
+                if(!$is_login)
+                    redirect_url("/login", "Please login!");
+                if(!$is_admin)
+                    redirect_url("/", "You are not admin!");
+                $MunTemplate->render_template('admin.html');
+                break;
                 
             default :
                 header("HTTP/1.1 404 Not Found");
