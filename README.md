@@ -1,2 +1,2 @@
-# Simple MVC Framework (PHP and Apache)
+# simple mvc in php (php, sqlite3, apache)
 
