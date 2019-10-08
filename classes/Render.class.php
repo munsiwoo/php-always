@@ -1,11 +1,11 @@
 <?php
 # made by munsiwoo
 class Render extends SQLite3 {
-	function __construct() {
-		parent::__construct(__DB__);
-	}
+    function __construct() {
+        parent::__construct(__DB__);
+    }
 
-	public function get_top_menu($is_login, $is_admin) { // Render header.html
+    public function get_top_menu($is_login, $is_admin) { // Render header.html
         $retval = $is_login ? __USER_MENU__ : __GUEST_MENU__;
         if($is_admin)
             $retval['Admin'] = __ADMIN_PAGE__;
