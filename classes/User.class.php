@@ -1,9 +1,9 @@
 <?php
 # made by munsiwoo
 class User extends SQLite3 {
-	function __construct() {
-		parent::__construct(__DB__);
-	}
+    function __construct() {
+        parent::__construct(__DB__);
+    }
 
     public function user_login($data) {
         $username = anti_sqlite_inject($data['username']);

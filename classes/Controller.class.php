@@ -6,9 +6,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/classes/MunTemplate.class.php';
 # made by munsiwoo
 
 class Controller {
-	function __construct($http_method, $request_uri, $is_login, $is_admin) {
-		$User = new User();
-		$Render = new Render();
+    function __construct($http_method, $request_uri, $is_login, $is_admin) {
+        $User = new User();
+        $Render = new Render();
         $Board = new Board();
         $MunTemplate = new MunTemplate(__TEMPLATE__);
 
@@ -16,7 +16,7 @@ class Controller {
         Remove the this comment if you need CSRF mitigation.
         And set __DOMAIN__ in /config/config.php
     
-		if($http_method == 'POST') { // CSRF mitigation
+        if($http_method == 'POST') { // CSRF mitigation
             $referer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
             if($referer !== __DOMAIN__) die('Not allowed referer!');
         } */
