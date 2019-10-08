@@ -1,9 +1,9 @@
 <?php
 # made by munsiwoo
 class Board extends SQLite3 {
-	function __construct() {
-		parent::__construct(__DB__);
-	}
+    function __construct() {
+        parent::__construct(__DB__);
+    }
 
     private function is_writer($no, $username) {
         $result = $this->query("SELECT username FROM mun_board WHERE no='{$no}';");
