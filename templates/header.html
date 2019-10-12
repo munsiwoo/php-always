@@ -1,13 +1,13 @@
 <html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-	<title>@var(__TITLE__)</title>
-	<link rel="stylesheet" href="/static/css/style.css">
-	<script src="/static/js/jquery-3.4.1.min.js"></script>
+    <title>@var(__TITLE__)</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-	<br>
+    <br>
     @mun foreach($top_menu as $menu=>$url)
-	   <a href="@var($url)">@var($menu)</a>&nbsp;
+        <a href="@var($url)">@var($menu)</a>&nbsp;
     @endforeach
