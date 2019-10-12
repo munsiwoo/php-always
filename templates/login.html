@@ -1,11 +1,11 @@
 <script>
-	function user_login() {
-		let data = {
-			'username':$('[name="username"]').val(),
-			'password':$('[name="password"]').val(),
-		};
+    function user_login() {
+        let data = {
+            'username':$('[name="username"]').val(),
+            'password':$('[name="password"]').val(),
+        };
 
-		$.post("/login", data, function(response) {
+        $.post("/login", data, function(response) {
             let result = JSON.parse(response);
             $(".login-result").text(result['msg']);
             $(".login-result").fadeIn(1000);
@@ -16,14 +16,14 @@
                 }, 1000);
             }
             $(".login-result").fadeOut(2000);
-		});
-	}
+        });
+    }
 </script>
 
 <h1>Login</h1>
 <form method="POST" class="login-form">
-	<input type="text" name="username" placeholder="Username" required="" autofocus=""><br>
+    <input type="text" name="username" placeholder="Username" required="" autofocus=""><br>
     <input type="password" name="password" placeholder="Password" required="">
-	<input type="submit" value="Login" onclick="user_login(); return false;">
+    <input type="submit" value="Login" onclick="user_login(); return false;">
 </form>
 <div class="login-result"></div>
