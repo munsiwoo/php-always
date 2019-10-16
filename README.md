@@ -7,7 +7,7 @@ Implemented in an MVC pattern and includes a simple router and a [MunTemplate](h
 | ----------- | ------------- |
 | OS          | Ubuntu 16.04  |
 | HTTP Server | Apache2       |
-| Programming | PHP7, SQLite3 |
+| Programming language | PHP 7.0.33, SQLite3 |
 
 ### Installation for linux
 
