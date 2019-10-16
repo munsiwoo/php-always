@@ -3,7 +3,7 @@
 This is a simple PHP framework.
 Implemented in an MVC pattern and includes a simple router and a [MunTemplate](https://github.com/munsiwoo/mun-template).
 
-| Env         | Name          |
+| Dev env         | Name          |
 | ----------- | ------------- |
 | OS          | Ubuntu 16.04  |
 | HTTP Server | Apache2       |
