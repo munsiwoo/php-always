@@ -52,7 +52,7 @@ class Controller {
 
             case '/login' :
                 if($http_method == 'POST') {
-                    echo $User->user_login($_POST);
+                    echo $User->login($_POST);
                     break;
                 }
                 $MunTemplate->render_template('login.html');
@@ -60,7 +60,7 @@ class Controller {
 
             case '/register' :
                 if($http_method == 'POST') {
-                    echo $User->user_register($_POST);
+                    echo $User->register($_POST);
                     break;
                 }
                 $MunTemplate->render_template('register.html');

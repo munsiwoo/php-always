@@ -5,7 +5,7 @@ class User extends SQLite3 {
         parent::__construct(__DB__);
     }
 
-    public function user_login($data) {
+    public function login($data) {
         $username = anti_sqlite_inject($data['username']);
         $password = process_password($data['password']);
         $retval = ['status' => false];
@@ -31,7 +31,7 @@ class User extends SQLite3 {
         return json_encode($retval);
     }
 
-    public function user_register($data) {
+    public function register($data) {
 
         $username = anti_sqlite_inject(mb_substr($data['username'], 0, 30));
         $password = process_password($data['password']);
