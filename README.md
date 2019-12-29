@@ -6,8 +6,8 @@ Implemented in an MVC pattern and includes a simple router and a [MunTemplate](h
 | Dev env         | Name          |
 | ----------- | ------------- |
 | OS          | Ubuntu 16.04  |
-| HTTP Server | Apache2       |
-| Programming language | PHP 7.0.33, SQLite3 |
+| Server | Apache2       |
+| language | PHP 7, SQLite3 |
 
 ### Installation for linux
 
