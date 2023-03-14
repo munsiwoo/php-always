@@ -2,6 +2,8 @@
 
 This is an ultra-simple skeleton php application for pure PHP users.  
 The currently implemented classes are sample codes that implement basic login and signup feature. If you need a new feature, implement a new class and add it to `classes/Controller.class.php` to easily implement and manage your web application with MVC patterns. I've deployed many projects based on code from this repository. I'll be implementing some pretty good router class soon. Long live pure PHP.  
+  
+Classics never die.
 
 ## Spec
 \- [debian:11-slim](https://hub.docker.com/layers/library/debian/11-slim/images/sha256-139a42fa3bde3e5bad6ae912aaaf2103565558a7a73afe6ce6ceed6e46a6e519)  
