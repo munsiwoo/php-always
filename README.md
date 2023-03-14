@@ -1,4 +1,4 @@
-# PHPAlways
+# php-always
 
 The code in this repository is a skeletonized implementation of login and signup. (just example code)  
 ```
