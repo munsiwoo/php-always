@@ -1,0 +1,50 @@
+@import(header.html)
+<div class="container py-5">
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 p-5">
+        <form id="login">
+            <div class="form-group row mb-2">
+                <div class="col-12">
+                    <input type="text" class="form-control" name="userid" placeholder="User Id" required autofocus>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <div class="col-12">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+            </div>
+            <button class="btn w-100 mt-5 mb-2 btn-primary">Sign In</button>
+        </form>
+        <a href="/register">
+            <button class="btn w-100 btn-light">Create a new account</button>
+        </a>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+</div>
+<script>
+window.onload = () => {
+document.getElementById('login').addEventListener('submit', (event)=>{
+    let data = {
+        userid: event.target.userid.value,
+        password: event.target.password.value
+    };
+    window.fetch('/api/v1/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data['message']);
+        if(data['status']) location.replace('/');
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+    event.preventDefault();
+});
+};
+</script>
+@import(footer.html)
